@@ -204,3 +204,13 @@ $(form).submit(function(e) {
   })
 
 });
+
+
+
+
+// #GO BACK
+// =========================================================================
+
+$('.go-back').on('click', function() {
+    window.history.back();
+});

@@ -1,0 +1,85 @@
+{% extends 'layouts/app.twig' %}
+{% block title %}Essex Kent Jr. Golf Hughes Tour | 2018 Players{% endblock %}
+{% block description %}The Southland Junior Tour is a summer golf tournament for competitive boys and girls which has been operating since 2010.{% endblock %}
+
+{% block content %}
+<header class="header">
+    <div class="header__container container">
+        <div class="logo">
+            <a href="{{ path_for('home') }}"><img src="/assets/img/header-logo.png" alt="Essex Kent JR. Golf Hughes Tour" draggable="false"></a>
+        </div>
+
+        <nav class="nav">
+            <div class="nav__container container">
+                <div class="menu">
+                    <ul class="nav__navbar is--active">
+                        <li><a href="{{ path_for('home') }}#home">Home</a></li>
+                        <li><a href="{{ path_for('players') }}">Players</a></li>
+                        <li><a href="{{ path_for('home') }}#schedule">Schedule</a></li>
+                        <li><a href="{{ path_for('home') }}#register">Register</a></li>
+                        <li><a href="{{ path_for('home') }}#contact">Contact</a></li>
+                    </ul>
+                </div>
+                 {% include 'partials/hamburger.twig' %}
+            </div>
+        </nav>
+
+    </div>
+</header>
+
+<section class="players-main">
+    <div class="players-main__container container">
+        {% if players is not empty %}
+        
+            <div class="category-wrapper">
+                <button class="cat-button is--active" data-category="all">All</button>
+                {% for group in agegroups %}
+                    <button class="cat-button" data-category="group-{{ group.id }}">{{ group.name }}</button>
+                {% endfor %}
+            </div>
+
+            {% for player in players %}
+                <div class="player-card column-6 all group-{{ player.age_group_id }}">
+                    <div class="container--full">
+                        <div class="column-5">
+                            <div class="image-wrapper">
+                                <img src="/assets/uploads/players/{{ player.id }}/featured.jpg" alt="{{ player.fname }} {{ player.lname }}">
+                            </div>
+                        </div>
+
+                        <div class="column-7 content-wrapper">
+                            <h2>{{ player.fname }} {{ player.lname }}</h2>
+                            <div class="field">
+                                <h5>Player Group:</h5>
+                                <p>{{ player.agegroup.name }}</p>
+                            </div>
+
+                            <div class="field">
+                                <h5>Age:</h5>
+                                <p>{{ player.age }}</p>
+                            </div>
+
+                            <div class="field">
+                                <h5>Gender:</h5>
+                                <p>{{ player.gender|capitalize }}</p>
+                            </div>
+
+                            <div class="field">
+                                <h5>Bio:</h5>
+                                <p>{{ player.bio|slice(0, 150) }}...</p>
+                            </div>
+
+                            <a href="{{ path_for('home.player.view', { 'id': player.id }) }}">See More <i class="fa fa-caret-right"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1>Sorry, no players are currently registered.</h1>
+        {% endif %}
+    </div>
+</section>
+
+{% include 'partials/footer.twig' %}
+{% endblock %}

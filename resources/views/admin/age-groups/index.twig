@@ -1,0 +1,38 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Age Groups{% endblock %}
+
+{% block content %}
+
+<div class="age-groups index modal-cover">
+    <div class="index__container container">
+
+        <div class="top-bar">
+            <h1>All Age Groups</h1>
+            <a href="{{ path_for('agegroups.create') }}" class="button">Create New</a>
+        </div>
+
+        <div class="content-wrapper">
+            {% for group in groups %}
+                <div class="group-card column-4">
+                    <div class="title-group">
+                        <h4>{{ group.name }}</h4>
+                        <div class="options">
+                            <a href="{{ path_for('agegroups.edit', { 'id': group.id }) }}"><i class="fa fa-pencil"></i></a>
+                            <button class="delete" data-name="{{ group.name }}" data-id="{{ group.id }}"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <ul>
+                        {% for player in group.players|slice(0, 5) %}
+                            <li>{{ player.lname }}, {{ player.fname }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ path_for('agegroups.view', { 'id': group.id }) }}">See all <i class="fa fa-caret-right"></i></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% include 'admin/partials/delete-modals/age-groups.twig' %}
+{% endblock %}

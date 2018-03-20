@@ -23,6 +23,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
+// #SIMPLE MDE
+// =========================================================================
+
+window.SimpleMDE = require('simplemde');
+
+
+
 // #VUE
 // ========================================================================
 
@@ -34,7 +41,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+// Vue.component('delete-modal', require('./components/DeleteModal.vue'));
 
 // const app = new Vue({
 //     el: '#app'

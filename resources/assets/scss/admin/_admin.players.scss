@@ -1,0 +1,223 @@
+/*
+|--------------------------------------------------------------------------
+| #PLAYERS PAGES STYLES
+|--------------------------------------------------------------------------
+*/
+
+.admin {
+
+    .players {
+
+        // #INDEX
+        // =========================================================================
+
+        &.index {
+
+            .index__container {
+
+                table {
+
+                    tbody {
+
+                        td {
+
+                            .image-wrapper {
+                                width:100px;
+                                height:100px;
+                                overflow:hidden;
+
+                                img {
+                                    width:100%;
+                                    height:100%;
+                                    object-fit:cover;
+                                }
+                            }
+
+                            a, button {
+                                margin-left:.5rem;
+                            }
+
+                            button {
+                                background:none;
+                                padding:0;
+                                border:none;
+                                color:$primary;
+                                margin-top:.5rem;
+                                transition:all .2s ease;
+
+                                &:hover {
+                                    color:$secondary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        // #CREATE/EDIT
+        // =========================================================================
+
+        &.create, &.edit {
+
+            .create__container, .edit__container {
+
+                form {
+
+                    .form-wrapper {
+                        flex-direction:row;
+
+                        @media screen and (max-width:64em) {
+                            flex-direction:column;
+                        }
+
+                        .column-9, .column-3 {
+                            @media screen and (max-width:64em) {
+                                max-width:100%;
+                                width:100%;
+                            }
+                        }
+
+                        .details-wrapper {
+
+                            .details {
+                                margin-bottom:2rem;
+
+                                button {
+                                    width:100%;
+                                }
+                            }
+
+                            .image {
+                                border:5px dashed darken($grey-light, 10%);
+                                height:200px;
+
+                                .featured-image {
+                                    height:100%;
+                                    display:flex;
+                                    justify-content:center;
+                                    align-items:center;
+                                    font-size:1.5rem;
+                                    font-weight:800;
+                                    color: darken($grey-light, 10%);
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        color: lighten(color(secondary), 10%);
+                                    }
+
+                                    input {
+                                        display: none;
+                                    }
+                                }
+
+                                &-container {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    text-align: center;
+                                    cursor:pointer;
+                                    height:200px;
+                                    width:100%;
+                                    background:rgba(#c6cdd7, .4);
+                                    font-size:1.5rem;
+                                    font-weight:600;
+
+
+                                    .set-image {
+                                        max-width:80%;
+                                    }
+
+                                    #featured {
+                                        display:none;
+                                    }
+                                }
+
+                                .image-preview {
+                                    width: calc(100% + 10px);
+                                    height: 200px;
+                                    object-fit: cover;
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        // #VIEW
+        // =========================================================================
+
+        &.view {
+
+            .view__container {
+
+                .main-wrapper {
+                    flex-direction:row;
+
+                    .image {
+
+                        &-wrapper {
+                            max-width:100%;
+                            overflow:hidden;
+
+                            img {
+                                width:100%;
+                                height:100%;
+                                object-fit:cover;
+                            }
+                        }
+                    }
+
+                    .content-wrapper {
+                        margin-top:0;
+
+                        .field {
+                            display:flex;
+                            align-items:baseline;
+
+                            @media screen and (max-width:32em) {
+                                flex-direction:column;
+                                align-items:flex-start;
+                                justify-content:center;
+                            }
+
+                            h2 {
+                                margin-bottom:0;
+
+                                @media screen and (max-width:32em) {
+                                    margin-bottom:.5rem;
+                                }
+                            }
+
+                            p {
+                                margin-bottom:0;
+                                margin-left:.5rem;
+                            }
+
+                            &.bio {
+                                flex-direction:column;
+
+                                p {
+                                    margin-bottom:1rem;
+                                    margin-left:0;
+                                }
+                            }
+                        }
+                    }
+
+                    .scores-wrapper {
+                        margin-top:2rem;
+                    }
+                }
+            }
+        }
+
+    }
+}

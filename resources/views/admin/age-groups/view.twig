@@ -1,0 +1,99 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block content %}
+
+<div class="age-groups view">
+    <div class="view__container container">
+
+        <div class="top-bar">
+            <div class="title-group">
+                <h1>{{ group.name }}</h1>
+                <div class="options">
+                    <a href="{{ path_for('agegroups.edit', { 'id': group.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <button class="delete" data-name="{{ group.name }}" data-id="{{ group.id }}"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+
+            <a href="{{ path_for('agegroups.index') }}" class="button">View All</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Featured</td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Bio</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in players %}
+                    {% if item.age_group_id == group.id %}
+                        <tr>
+                            <td>
+                                <div class="image-wrapper">
+                                    <img src="/assets/uploads/players/{{ item.image }}/featured.jpg" draggable="false">
+                                </div>
+                            </td>
+                            <td><a href="{{ path_for('players.view', { 'id': item.id }) }}">{{ item.lname }}, {{ item.fname }}</a></td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.bio|slice(0, 100) }}...</td>
+                            <td>
+                                <a href="{{ path_for('players.edit', { 'id': item.id }) }}"><i class="fa fa-pencil"></i></a>
+                                <button class="delete" data-name="{{ item.fname }} {{ item.lname }}" data-id="{{ item.id }}"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {# <table>
+            <thead>
+                <tr>
+                    <td>Player Name</td>
+                    {% for item in tournaments %}
+                        <td>{{ item.name }}</td>
+                    {% endfor %}
+                    <td>Player Total</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td><a href="{{ path_for('players.view', { 'id': player.id }) }}">{{ player.lname }}, {{ player.fname }}</a></td>
+                        {% for tourn in tournaments %}
+                            <td>
+                            {% set courseTotal = 0 %}
+                            {% for item in player.scores %}
+                                {% if item.tournament_id == tourn.id %}
+                                    {% set courseTotal = courseTotal + item.score %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ courseTotal }}
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {% set total = 0 %}
+                            {% for item in scores %}
+                                {% if item.player_id == player.id %}
+                                    {% set total = total + item.score %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ total }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> #}
+    </div>
+</div>
+
+{% include 'partials/paginate.twig' with { 'context': 'players' } %}
+{% include 'admin/partials/delete-modals/age-groups.twig' %}
+{% endblock %}

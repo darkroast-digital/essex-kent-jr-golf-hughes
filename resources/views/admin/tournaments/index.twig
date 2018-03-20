@@ -1,0 +1,52 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Tournaments{% endblock %}
+
+{% block content %}
+
+<div class="tournaments index modal-cover">
+    <div class="index__container container">
+
+        <div class="top-bar">
+            <h1>All Tournaments</h1>
+            <a href="{{ path_for('tournaments.create') }}" class="button">Create New</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Course</td>
+                    <td>Date</td>
+                    <td>Length</td>
+                    <td>Course Par</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in tournaments %}
+                    <tr>
+                        <td><a href="{{ path_for('tournaments.view', { 'id': item.id }) }}">{{ item.name }}</a></td>
+                        <td>
+                            {% if item.date|date('h:ia') == '12:00am' %}
+                                {{ item.date|date('F d, Y') }} - Time TBD
+                            {% else %}
+                                {{ item.date|date('F d, Y \\- h:ia') }}
+                            {% endif %}
+                        </td>
+                        <td>{{ item.holes }}</td>
+                        <td>{{ item.par }}{% if item.par is empty %}Not set{% endif %}</td>
+                        <td>
+                            <a href="{{ path_for('tournaments.edit', { 'id': item.id }) }}"><i class="fa fa-pencil"></i></a>
+                            <button class="delete" data-name="{{ item.name }}" data-id="{{ item.id }}"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% include 'partials/paginate.twig' with { 'context': 'tournaments' } %}
+{% include 'admin/partials/delete-modals/tournaments.twig' %}
+{% endblock %}

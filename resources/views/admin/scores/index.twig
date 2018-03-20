@@ -1,0 +1,53 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Scores{% endblock %}
+
+{% block content %}
+
+<div class="scores index">
+    <div class="index__container container">
+
+        <div class="top-bar">
+            <h1>All Scores</h1>
+            <a href="{{ path_for('scores.create') }}" class="button">Create New</a>
+        </div>
+
+        <div class="content-wrapper container--full">
+            <div class="tourn18 column-6">
+                <h2>18 Hole Tournaments</h2>
+
+                {% for item in tourn18 %}
+                    <div class="tourn-card">
+                        <h3>{{ item.name }}</h3>
+                        <h4>{{ item.date|date('F d, Y \\- h:ia') }}</h4>
+                        <a href="{{ path_for('scores.view', { 'id': item.id }) }}">Results</a>
+                    </div>
+                {% endfor %}
+
+                <div class="tourn-card">
+                    <h3>Overall Standings</h3>
+                    <a href="{{ path_for('scores.overall', { 'holes': 18 }) }}">Results</a>
+                </div>
+            </div>
+
+            <div class="tourn9 column-6">
+                <h2>9 Hole Tournaments</h2>
+
+                {% for item in tourn9 %}
+                    <div class="tourn-card">
+                        <h3>{{ item.name }}</h3>
+                        <h4>{{ item.date|date('F d, Y \\- h:ia') }}</h4>
+                        <a href="{{ path_for('scores.view', { 'id': item.id }) }}">Results</a>
+                    </div>
+                {% endfor %}
+
+                <div class="tourn-card">
+                    <h3>Overall Standings</h3>
+                    <a href="{{ path_for('scores.overall', { 'holes': 9 }) }}">Results</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

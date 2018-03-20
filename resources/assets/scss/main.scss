@@ -92,6 +92,23 @@
 
 
 
+
+// #ADMIN STYLES
+// =========================================================================
+
+@import 'admin/_admin.agegroups';
+@import 'admin/_admin.auth';
+@import 'admin/_admin.holes';
+@import 'admin/_admin.players';
+@import 'admin/_admin.scores';
+@import 'admin/_admin.styles';
+@import 'admin/_admin.tournaments';
+
+@import '~simplemde/dist/simplemde.min';
+
+
+
+
 // #STYLE
 // =========================================================================
 

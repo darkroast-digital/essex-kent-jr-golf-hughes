@@ -1,0 +1,53 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Players{% endblock %}
+
+{% block content %}
+
+<div class="players index modal-cover">
+    <div class="index__container container">
+
+        <div class="top-bar">
+            <h1>All Players</h1>
+            <a href="{{ path_for('players.create') }}" class="button">Create New</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Featured</td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Age Group</td>
+                    <td>Bio</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in players %}
+                    <tr>
+                        <td>
+                            <div class="image-wrapper">
+                                <img src="/assets/uploads/players/{{ item.image }}/featured.jpg" draggable="false">
+                            </div>
+                        </td>
+                        <td><a href="{{ path_for('players.view', { 'id': item.id }) }}">{{ item.lname }}, {{ item.fname }}</a></td>
+                        <td>{{ item.age }}</td>
+                        <td>{{ item.agegroup.name }}</td>
+                        <td>{{ item.bio|slice(0, 100) }}...</td>
+                        <td>
+                            <a href="{{ path_for('players.edit', { 'id': item.id }) }}"><i class="fa fa-pencil"></i></a>
+                            <button class="delete" data-name="{{ item.fname }} {{ item.lname }}" data-id="{{ item.id }}"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% include 'partials/paginate.twig' with { 'context': 'players' } %}
+{% include 'admin/partials/delete-modals/players.twig' %}
+
+{% endblock %}

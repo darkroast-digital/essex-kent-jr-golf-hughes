@@ -1,0 +1,36 @@
+<div class="admin-sidebar">
+    <nav class="admin-nav">
+        <ul>
+            <li class="dropdown-wrapper {% if 'age-groups' in current_path %}is--open{% endif %}"><a href="{{ path_for('agegroups.index') }}">Age Groups</a>
+                <ul class="submenu">
+                    <li><a href="{{ path_for('agegroups.index') }}">View All</a></li>
+                    <li><a href="{{ path_for('agegroups.create') }}">Create</a></li>
+                </ul>
+            </li>
+            {# <li class="dropdown-wrapper {% if 'holes' in current_path %}is--open{% endif %}"><a href="{{ path_for('holes.index') }}">Holes</a>
+                <ul class="submenu">
+                    <li><a href="{{ path_for('holes.index') }}">View All</a></li>
+                    <li><a href="{{ path_for('holes.create') }}">Create</a></li>
+                </ul>
+            </li> #}
+            <li class="dropdown-wrapper {% if 'players' in current_path %}is--open{% endif %}"><a href="{{ path_for('players.index') }}">Players</a>
+                <ul class="submenu">
+                    <li><a href="{{ path_for('players.index') }}">View All</a></li>
+                    <li><a href="{{ path_for('players.create') }}">Create</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-wrapper {% if 'scores' in current_path %}is--open{% endif %}"><a href="{{ path_for('scores.index') }}">Scores</a>
+                <ul class="submenu">
+                    <li><a href="{{ path_for('scores.index') }}">View All</a></li>
+                    <li><a href="{{ path_for('scores.create') }}">Add Score</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-wrapper {% if 'tournaments' in current_path %}is--open{% endif %}"><a href="{{ path_for('tournaments.index') }}">Tournaments</a>
+                <ul class="submenu">
+                    <li><a href="{{ path_for('tournaments.index') }}">View All</a></li>
+                    <li><a href="{{ path_for('tournaments.create') }}">Create</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

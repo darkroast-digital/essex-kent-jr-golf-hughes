@@ -1,0 +1,145 @@
+/*
+|--------------------------------------------------------------------------
+| #SCORES PAGES STYLES
+|--------------------------------------------------------------------------
+*/
+
+.admin {
+
+    .scores {
+
+        // #INDEX
+        // =========================================================================
+
+        &.index {
+
+            .index__container {
+
+                .content-wrapper {
+                    width:100%;
+
+                    .column-6 {
+                        @media screen and (max-width:64em) {
+                            max-width:100%;
+                            width:100%;
+                        }
+                    }
+
+                    h2 {
+                        text-align:center;
+                        margin-bottom:2rem;
+                    }
+
+                    .tourn-card {
+                        padding:3rem;
+                        box-shadow:0 0 25px rgba(#333, .2);
+                        margin-bottom:2rem;
+                        text-align:center;
+                        width:80%;
+                        margin-left:10%;
+
+                        @media screen and (max-width:64em) {
+                            width: 100%;
+                            margin-left:0;
+                        }
+
+                        &:hover {
+
+                            a {
+                                color:$secondary;
+                            }
+                        }
+
+                        a {
+                            width:100%;
+                            font-weight:800;
+                            margin-top:.5rem;
+                            text-decoration:underline;
+                            transition:all .2s ease;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        // #VIEW
+        // =========================================================================
+
+        &.view {
+
+            .view__container {
+
+                .container--full {
+                    max-width:100%;
+                    width:100%;
+                }
+
+                table {
+                    width:100%;
+                    margin-bottom:3rem;
+
+                    @media screen and (max-width:90em) {
+                        display:block;
+                        overflow-x:scroll;
+                    }
+                }
+            }
+        }
+
+
+
+
+        // #CREATE
+        // =========================================================================
+
+        &.create {
+
+            .create__container {
+
+                .hidden-tournaments, .hidden-players {
+                    display:none;
+                }
+
+                .container--full {
+                    flex-direction:row;
+                    justify-content:flex-start;
+                    width:100%;
+
+                    @media screen and (max-width:64em) {
+                        flex-direction:column;
+                    }
+
+                    .field {
+                        margin-right:2rem;
+
+                        &:last-of-type {
+                            margin-right:0;
+                        }
+                    }
+                }
+
+                .holes-wrapper {
+                    margin:1rem 0;
+
+                    @media screen and (max-width:64em) {
+                        flex-direction:row;
+                    }
+
+                    .field {
+                        margin-bottom:1rem;
+                        margin-right:.5rem;
+                    }
+
+                    label {
+                        font-weight:600;
+                    }
+                }
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,35 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}auth{% endblock %}
+{% block title %}Password Recovery{% endblock %}
+
+{% block content %}
+
+<section class="forgot">
+    <div class="forgot__container container">
+        <div class="column-5 image">
+            <div class="image-wrapper">
+                <img src="/assets/img/hero-logo.png" alt="Essex Kent Junior Golf Hughes Tour" draggable="false">
+            </div>
+        </div>
+
+        <div class="column-7 content">
+            <div class="content-wrapper">
+                <h1>Password Recovery</h1>
+                <form action="{{ path_for('forgot') }}" method="post" class="forgot-form">
+                    <div class="container--full form-container">
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" required>
+                        </div>
+
+                        <button class="button submit">Submit</button>
+                    </div>
+                </form>
+
+                <a href="{{ path_for('login') }}">Log In</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

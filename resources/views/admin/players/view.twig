@@ -1,0 +1,103 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}{{ player.fname }} {{ player.lname }}{% endblock %}
+
+{% block content %}
+
+<div class="players view">
+    <div class="view__container container">
+
+        <div class="top-bar">
+            <div class="title-group">
+                <h1>{{ player.fname }} {{ player.lname }}</h1>
+                <div class="options">
+                    <a href="{{ path_for('players.edit', { 'id': player.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <button class="delete" data-name="{{ player.fname }} {{ player.lname }}" data-id="{{ player.id }}"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+
+            <a href="{{ path_for('players.index') }}" class="button">View All</a>
+        </div>
+
+        <div class="main-wrapper container--full">
+            <div class="image column-4">
+                <div class="image-wrapper">
+                    <img src="/assets/uploads/players/{{ player.id }}/featured.jpg" draggable="false">
+                </div>
+            </div>
+
+            <div class="content-wrapper column-8">
+                <div class="field">
+                    <h2>Player Name</h2>
+                    <p>{{ player.fname }} {{ player.lname }}</p>
+                </div>
+
+                <div class="field">
+                    <h2>Player Age</h2>
+                    <p>{{ player.age }}</p>
+                </div>
+
+                <div class="field">
+                    <h2>Player Gender</h2>
+                    <p>{{ player.gender|capitalize }}</p>
+                </div>
+
+                <div class="field">
+                    <h2>Player Age Group</h2>
+                    <p>{{ agegroup.name }}</p>
+                </div>
+
+                <div class="field bio">
+                    <h2>Player Bio</h2>
+                    {{ player.bio|raw }}
+                </div>
+            </div>
+
+            <div class="column-12 scores-wrapper">
+                <h2>Player Scores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            {% set h = numHoles %}
+                            {% for i in range(1, h) %}
+                                <th>{{ i }}</th>
+                            {% endfor %}
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for course in tournaments %}
+                            {% if course.holes == numHoles %}
+                                <tr>
+                                    <td>{{ course.name }}</td>
+                                    {% set h = numHoles %}
+                                    {% set total = 0 %}
+                                    {% for i in range(1, h) %}
+                                        <td>
+                                        {% for item in scores %}
+                                            {% if course.id == item.tournament_id %}
+                                                {% if i == item.hole_id %}
+                                                    {{ item.score }}
+                                                    {% set total = total + item.score %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </td>
+                                    {% endfor %}
+                                    <td>{{ total }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'admin/partials/delete-modals/players.twig' %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="delete-modal">
+    <div class="block column-6">
+        <h4>Are you sure you want to delete <span class="item-name"></span>?</h4>
+        <p>This action cannot be undone.</p>
+
+        <button class="submit button close">No, Take Me Back</button>
+        <form action="/admin/age-groups/delete/" method="post" class="delete-form">
+            <input type="hidden" name="hiddenInput" class="hidden-input" value="">
+            <div class="form-container container--full">
+                <button class="submit button delete-button">Yes, Delete It</button>
+            </div>
+        </form>
+    </div>
+</div>

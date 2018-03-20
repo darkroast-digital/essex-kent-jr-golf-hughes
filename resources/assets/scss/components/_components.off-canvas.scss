@@ -9,7 +9,7 @@
 
 
 
-.off-canvas {
+.off-canvas, .admin-off-canvas {
     position: fixed;
     top: 0;
     right: 0;
@@ -45,23 +45,6 @@
             margin-bottom:1rem;
             width:100%;
             position:relative;
-
-            &:after {
-                content:'';
-                position:absolute;
-                width:100%;
-                height:1px;
-                left:0;
-                bottom:-.5rem;
-                background-color:$secondary;
-            }
-
-            &:last-of-type {
-
-                &:after {
-                    background-color:white;
-                }
-            }
         }
     }
 }

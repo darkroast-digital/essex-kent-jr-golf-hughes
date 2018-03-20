@@ -7,15 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $fillable = [
-        'username',
         'name',
         'email',
-        'username',
         'password',
+        'reset_token'
     ];
-
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
 }

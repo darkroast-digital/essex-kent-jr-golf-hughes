@@ -1,0 +1,46 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Holes{% endblock %}
+
+{% block content %}
+
+<div class="holes index">
+    <div class="index__container container">
+
+        <div class="top-bar">
+            <h1>All Courses</h1>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Course</td>
+                    {% for i in range(1, 18) %}
+                        <td>Par {{i}}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in courses %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        {% for hole in holes %}
+                            {% if item.id == hole.tournament_id %}
+                                {% if hole.par == null %}
+                                    <td></td>
+                                {% else %}
+                                    <td>{{ hole.par }}</td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% include 'partials/paginate.twig' with { 'context': 'holes' } %}
+
+{% endblock %}

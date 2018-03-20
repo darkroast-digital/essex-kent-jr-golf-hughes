@@ -1,0 +1,54 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Add Score{% endblock %}
+
+{% block content %}
+
+<div class="scores create">
+    <div class="create__container container">
+
+        <div class="top-bar">
+            <h1>Add Score</h1>
+        </div>
+
+        <div class="content-wrapper container--full">
+            <form action="{{ path_for('scores.create') }}" method="post" class="scores-form">
+                <div class="container--full form-wrapper">
+                    <div class="field">
+                        <label for="group">Age Group</label>
+                        <select name="group" class="agegroups">
+                            <option disabled selected>Select Age Group</option>
+                            {% for group in groups %}
+                                <option value="{{ group.holes_played }}" data-group="{{ group.id }}">{{ group.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+
+                    <div class="field hidden-tournaments">
+                        <label for="tournament">Tournament</label>
+                        <select name="tournament" class="js-tournaments">
+                            
+                        </select>
+                    </div>
+
+                    <div class="field hidden-players">
+                        <label for="player">Player</label>
+                        <select name="player" class="js-players">
+                            
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="holes-wrapper container--full">
+                    
+                </div>
+
+                <button class="button submit">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<div class="admin-header">
+    <div class="admin-header__container container--full">
+        <div class="logo-wrapper">
+            <a href="{{ path_for('admin.index') }}">
+                <img src="/assets/img/header-logo.png" alt="Essex Kent Jr. Golf Hughes Tour" draggable="false">
+            </a>
+        </div>
+
+        <div class="logout-wrapper">
+            <a href="{{ path_for('logout') }}">Logout</a>
+        </div>
+
+        {% include 'admin/partials/hamburger.twig' %}
+    </div>
+</div>

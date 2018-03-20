@@ -1,0 +1,71 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Edit {{ tournament.name }}{% endblock %}
+
+{% block content %}
+
+<div class="tournaments edit">
+    <div class="edit__container container">
+        <div class="top-bar">
+            <h1>Edit {{ tournament.name }}</h1>
+            <a href="{{ path_for('tournaments.index') }}" class="button">View All</a>
+        </div>
+
+        <div class="content-wrapper">
+            <form action="{{ path_for('tournaments.edit', { 'id': tournament.id }) }}" method="post" class="edit-form">
+                <div class="container--full form-wrapper">
+                    <div class="main column-8">
+                        <div class="field">
+                            <label for="name">Course Name</label>
+                            <input type="text" name="name" placeholder="Seven Lakes" value="{{ tournament.name }}" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="date">Tournament Date</label>
+                            <input type="date" name="date" value="{{ date }}" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="time">Tournament Time <small>(hh:mm am/pm)</small></label>
+                            <input type="time" name="time" value="{{ time }}">
+                        </div>
+
+                        <div class="field">
+                            <label for="length">Tournament Length:</label>
+                            <select name="length" required>
+                                <option value="9" {% if tournament.holes == 9 %}selected{% endif %}>9 Holes</option>
+                                <option value="18" {% if tournament.holes == 18 %}selected{% endif %}>18 Holes</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="coursePar">Course Par</label>
+                            <input type="number" name="coursePar" value="{{ tournament.par }}" placeholder="45">
+                        </div>
+
+                        <button class="button submit">Update</button>
+                    </div>
+
+                    <div class="pars column-4">
+                        <h3>Individual Hole Pars (optional)</h3>
+                        <div class="container--full holes">
+
+                            {% for hole in holes %}
+                                {% if tournament.id == hole.tournament_id %}
+                                    <div class="field column-4">
+                                        <label for="hole{{ hole.hole }}">Hole {{ hole.hole }} Par</label>
+                                        <input type="number" name="hole{{ hole.hole }}" {% if hole.par != null %}value="{{ hole.par }}"{% endif %} placeholder="5">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

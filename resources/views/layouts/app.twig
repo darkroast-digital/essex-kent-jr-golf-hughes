@@ -46,6 +46,12 @@
 </head>
 <body>
     {% include 'partials/off-canvas.twig' %}
+    {% include 'partials/flash.twig' %}
+    {% if 'admin' in block('pageclass') %}
+        {% include 'admin/partials/header.twig' %}
+        {% include 'admin/partials/sidebar.twig' %}
+        {% include 'admin/partials/off-canvas.twig' %}
+    {% endif %}
     <div class="{% block pageclass %}{% endblock %}" id="app">
             <div class="content">
                 {% include 'partials/overlay.twig' %}

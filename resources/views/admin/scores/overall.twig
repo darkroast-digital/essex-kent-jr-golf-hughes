@@ -1,0 +1,81 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Overall Scores - {{ holes }} Holes{% endblock %}
+
+{% block content %}
+
+<div class="scores view">
+    <div class="view__container container">
+
+        <div class="top-bar">
+            <h1>Overall Scores - {{ holes }} Holes</h1>
+            <a href="{{ path_for('scores.index') }}" class="button">View All</a>
+        </div>
+
+        <div class="main-wrapper container--full">
+            {% for item in groups %}
+                <h2>{{ item.name }}</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Group</th>
+                            {% set i = 1 %}
+                            {% for tournament in tournaments %}
+                                <th>Event {{ i }}</th>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                            <th>Scoring Average</th>
+                            <th>Total</th>
+                            <th>Rounds</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for player in players %}
+                            {% if player.agegroup.id == item.id %}
+                                <tr>
+                                    <td>{{ player.lname }}, {{ player.fname }}</td>
+                                    <td>{{ player.agegroup.name }}</td>
+                                    {% set total = 0 %}
+                                    {% set count = 0 %}
+                                    {% for tournament in tournaments %}
+                                        <td>
+                                            {% set tournTotal = 0 %}
+                                            {% for score in player.scores %}
+                                                {% if score.tournament_id == tournament.id %}
+                                                    {% set tournTotal = tournTotal + score.score %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {{ tournTotal }}
+                                            
+                                            {% if tournTotal != 0 %}
+                                                {% set count = count + 1 %}
+                                            {% endif %}
+
+                                            {% set total = total + tournTotal %}
+                                        </td>
+                                    {% endfor %}
+                                    <td>
+                                        {% if count != 0 %}
+                                            {% set avg = total / count %}
+                                            {{ avg|round(2, 'floor') }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ total }}</td>
+                                    <td>{{ count }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

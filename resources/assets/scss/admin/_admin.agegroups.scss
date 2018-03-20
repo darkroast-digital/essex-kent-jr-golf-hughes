@@ -1,0 +1,150 @@
+/*
+|--------------------------------------------------------------------------
+| #AGE GROUP PAGES STYLES
+|--------------------------------------------------------------------------
+*/
+
+.admin {
+
+    .age-groups {
+
+        // #INDEX
+        // =========================================================================
+
+        &.index {
+
+            .index__container {
+
+                .top-bar {
+                    @media screen and (max-width:32em) {
+                        flex-direction:column;
+                        display:flex;
+                        margin-bottom:2rem;
+                    }
+
+                    h1, a {
+                        @media screen and (max-width:32em) {
+                            width:100%;
+                            text-align:center;
+                        }
+                    }
+                }
+                
+                .content-wrapper {
+                    display:flex;
+                    flex-wrap:wrap;
+
+                    .group-card {
+                        padding:3rem;
+                        box-shadow:0 0 25px rgba(#333, .2);
+                        margin-bottom:2rem;
+
+                        @media screen and (max-width:64em) {
+                            max-width:100%;
+                            width:100%;
+                        }
+
+                        .title-group {
+                            display:flex;
+                            justify-content:center;
+                            align-items:baseline;
+
+                            h4 {
+                                text-align:center;
+                                font-size:1.1rem;
+                            }
+
+                            .options {
+                                display:flex;
+
+                                a, button {
+                                    margin-left:.5rem;
+                                }
+
+                                button {
+                                    background:none;
+                                    padding:0;
+                                    border:none;
+                                    color:$primary;
+                                    margin-top:.5rem;
+                                    transition:all .2s ease;
+
+                                    &:hover {
+                                        color:$secondary;
+                                    }
+                                }
+                            }
+                        }
+
+                        a {
+                            text-align:right;
+                            width:100%;
+                            font-weight:800;
+                            margin-top:.5rem;
+                            text-decoration:underline;
+                            transition:all .2s ease;
+
+                            &:hover {
+                                color:$secondary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        // #VIEW
+        // =========================================================================
+        
+        &.view {
+
+            table {
+
+                a {
+                    color:$primary;
+                    transition:all .2s ease;
+
+                    &:hover {
+                        color:$secondary;
+                    }
+                }
+
+                td {
+                    
+                    .image-wrapper {
+                        width:100px;
+                        height:100px;
+                        overflow:hidden;
+
+                        img {
+                            width:100%;
+                            height:100%;
+                            object-fit:cover;
+                        }
+                    }
+
+                    a, button {
+                        margin-left:.5rem;
+                    }
+
+                    button {
+                        background:none;
+                        padding:0;
+                        border:none;
+                        color:$primary;
+                        margin-top:.5rem;
+                        transition:all .2s ease;
+
+                        &:hover {
+                            color:$secondary;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

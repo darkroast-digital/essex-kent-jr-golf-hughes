@@ -1,0 +1,37 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}Edit {{ group.name }}{% endblock %}
+
+{% block content %}
+
+<div class="age-groups edit">
+    <div class="edit__container container">
+        <div class="top-bar">
+            <h1>Edit {{ group.name }}</h1>
+            <a href="{{ path_for('agegroups.view', { 'id': group.id }) }}" class="button">View Age Group</a>
+        </div>
+
+        <div class="content-wrapper">
+            <form action="{{ path_for('agegroups.edit', { 'id': group.id }) }}" method="post" class="edit-form">
+                <div class="container--full form-wrapper">
+                    <div class="field">
+                        <label for="name">Group Name:</label>
+                        <input type="text" name="name" placeholder="Junior Boys 11-13" value="{{ group.name }}" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="length">Tournament Length:</label>
+                        <select name="length" required>
+                            <option value="9" {% if group.holes_played == 9 %}selected{% endif %}>9 Holes</option>
+                            <option value="18" {% if group.holes_played == 18 %}selected{% endif %}>18 Holes</option>
+                        </select>
+                    </div>
+
+                    <button class="button submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

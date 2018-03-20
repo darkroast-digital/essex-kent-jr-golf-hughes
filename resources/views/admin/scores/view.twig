@@ -1,0 +1,123 @@
+{% extends 'layouts/app.twig' %}
+{% block pageclass %}admin{% endblock %}
+{% block title %}{{ tournament.name }} Scores{% endblock %}
+
+{% block content %}
+
+<div class="scores view">
+    <div class="view__container container">
+
+        <div class="top-bar">
+            <h1>{{ tournament.name }} Scores</h1>
+            <a href="{{ path_for('scores.index') }}" class="button">View All</a>
+        </div>
+
+        <div class="main-wrapper container--full">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Group</th>
+                        {% if tournament.holes == 9 %}
+                            {% for i in range(1, 9) %}
+                                <th>Hole {{ i }}</th>
+                            {% endfor %}
+                            <th>Total</th>
+                        {% endif %}
+
+                        {% if tournament.holes == 18 %}
+                            {% for i in range(1, 9) %}
+                                <th>Hole {{ i }}</th>
+                            {% endfor %}
+                            <th>Front</th>
+                            {% for i in range(10, 18) %}
+                                <th>Hole {{ i }}</th>
+                            {% endfor %}
+                            <th>Back</th>
+                            <th>Total</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for player in players %}
+                        <tr>
+                            <td>{{ player.lname }}, {{ player.fname }}</td>
+                            <td>{{ player.agegroup.name }}</td>
+
+                            {% for i in range(1, 9) %}
+                                <td>
+                                {% for score in player.scores %}
+                                    {% if score.tournament_id == tournament.id %}
+                                        {% if score.hole_id == i %}
+                                            {{ score.score }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                </td>
+                            {% endfor %}
+
+                            <td class="front">
+                                {% set front = 0 %}
+                                {% for i in range(1, 9) %}
+                                    {% for score in player.scores %}
+                                        {% if score.tournament_id == tournament.id %}
+                                            {% if score.hole_id == i %}
+                                                {% if score.score is not null %}
+                                                    {% set front = front + score.score %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {{ front }}
+                            </td>
+
+                            {% if tournament.holes == 18 %}
+                                {% for i in range(10, 18) %}
+                                    <td class="score">
+                                        {% for score in player.scores %}
+                                            {% if score.tournament_id == tournament.id %}
+                                                {% if score.hole_id == i %}
+                                                    {{ score.score }}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                {% endfor %}
+
+                                <td class="back">
+                                    {% set back = 0 %}
+                                    {% for i in range(10, 18) %}
+                                        {% for score in player.scores %}
+                                            {% if score.tournament_id == tournament.id %}
+                                                {% if score.hole_id == i %}
+                                                    {% if score.score is not null %}
+                                                        {% set back = back + score.score %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    
+                                    {{ back }}
+                                </td>
+
+                                <td class="total">
+                                    {% set total = front + back %}
+                                    {{ total }}
+                                </td>
+
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

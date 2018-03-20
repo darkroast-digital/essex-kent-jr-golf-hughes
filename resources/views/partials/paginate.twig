@@ -1,5 +1,56 @@
-<div class="paginate__container">
-    {% if tickets.nextPageUrl or tickets.previousPageUrl%}
-    <div><a href="{{ tickets.previousPageUrl }}">Prev Page</a> / <a href="{{ tickets.nextPageUrl }}">Next Page</a></div>
+<div class="paginate__container container">
+    {% if context == 'players' %}
+        {% if players.hasPages %}
+            {% if players.onFirstPage %}
+                
+            {% else %}
+                <a href="{{ players.previousPageUrl }}">Prev Page</a>
+                {% if players.hasMorePages %}
+                    /
+                {% endif %}
+            {% endif %}
+            {% if players.hasMorePages %}
+                    <a href="{{ players.nextPageUrl }}">Next Page</a>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
     {% endif %}
+
+    {% if context == 'tournaments' %}
+        {% if tournaments.hasPages %}
+            {% if tournaments.onFirstPage %}
+                
+            {% else %}
+                <a href="{{ tournaments.previousPageUrl }}">Prev Page</a>
+                {% if tournaments.hasMorePages %}
+                    /
+                {% endif %}
+            {% endif %}
+            {% if tournaments.hasMorePages %}
+                    <a href="{{ tournaments.nextPageUrl }}">Next Page</a>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {% if context == 'holes' %}
+        {% if courses.hasPages %}
+            {% if courses.onFirstPage %}
+                
+            {% else %}
+                <a href="{{ courses.previousPageUrl }}">Prev Page</a>
+                {% if courses.hasMorePages %}
+                    /
+                {% endif %}
+            {% endif %}
+            {% if courses.hasMorePages %}
+                    <a href="{{ courses.nextPageUrl }}">Next Page</a>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
 </div>
